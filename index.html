@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MEYER German Tech-Rx</title>
+<style>
+/* ===== Base reset & typography ===== */
+html, body, table, th, td, input, button, select, option, b, label {
+  font-size: 11px;
+  font-family: 'Manrope', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Top fixed header ===== */
+#topBlock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: #163d6d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3%;
+  z-index: 9999;
+}
+
+#topBlock h2 {
+  font-size: 17px;
+  margin-left: 3%;
+}
+
+.topMenu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.topMenu a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Layout ===== */
+.layout {
+  display: flex;
+  margin-top: 90px; /* clears fixed header */
+}
+
+.section {
+  margin-top: 20px;
+  margin-bottom: 500px;
+}
+
+/* ===== Table ===== */
+table {
+  border-collapse: collapse;
+  width: 600px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+th, td {
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  padding: 10px;
+}
+
+th {
+  background: #eee;
+  font-weight: 600;
+}
+
+/* Column widths */
+th:nth-child(1), td:nth-child(1) { width: 22%; }
+th:nth-child(2), td:nth-child(2) { width: 26%; }
+th:nth-child(3), td:nth-child(3) { width: 26%; }
+th:nth-child(4), td:nth-child(4) { width: 26%; }
+
+/* ===== Header colours ===== */
+th.blue, td.blue {
+  background: #d1dfe4;
+  color: black;
+}
+
+/* ===== Inputs ===== */
+input {
+  width: 80px;
+  text-align: center;
+  padding: 4px 6px;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px dotted black;
+  cursor: pointer;
+}
+
+/* ===== Rows ===== */
+.row {
+  margin-top: 10px;
+}
+
+.row label {
+  margin-right: 10px;
+}
+
+/* ===== Dropdowns ===== */
+select {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px dotted black;
+  border-radius: 6px;
+  background: #fff;
+  color: black;
+}
+
+select:hover {
+  background: #E0E0E0;
+}
+
+select:focus {
+  outline: none;
+}
+
+/* ===== Result ===== */
+#result {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+<div id="topBlock">
+ <h2>Acuvue Astigmatism Contact Lens Corrector<br>By Kiara Optometry</h2>
+<nav class="topMenu" style="user-select:none;">
+  <!-- First row -->
+  <div style="display:flex; gap:10px; justify-content:flex-start; margin-bottom:5px;">
+  
+  </div>
+
+</nav>
+</div>
+
+
+
+<div class="layout">
+  <main id="content" class="content">
+
+
+
+
+    <div id="s3" class="section">
+
+
+
+
+
+<table>
+<tr><th class="blue" colspan="4" style="text-align:left">
+
+1. Key in the current contact lens prescription.<br>
+2. Key in their response of the fan chart with a +0.75 fogging lens.<br>
+3. Press calculate prescription.<br>
+
+</th></tr>
+
+
+<tr><td colspan="4"><b><i>
+<br><br>
+<span style="font-size:12px">
+Current Contact Lens Prescription</span><br><br>
+
+  <!-- Inputs -->
+  <div class="row">
+    <label>SPH : <input id="TS_sph" type="number" step="0.25"></label>
+    <label>CYL : <input id="TS_cyl" type="number" step="0.25" ></label>
+    <label>AXIS : <input id="TS_axis" type="number" step="5" min="0" max="180"></label>
+</div>
+
+  <div style="margin-top:15px" class="row">
+
+    <button style="display:none; width:18%; margin-right:2%"id="lockFinalBtn">Save to List</button>
+  </div>
+
+<br><br>
+</b></i>
+</td></tr>
+<tr><td colspan="4"><b><i><br><br>
+<span style="font-size:12px">
+Current Fan Chart Results</span><br>
+
+  <!-- Dropdowns -->
+  <div class="row">
+    <div style="display:none">
+      <label>Duochrome : </label>
+      <select style="width:50%" id="duochrome">
+        <option value="both_badly">Both badly blur - 6 / 9 unreadable </option>
+        <option style="display:none"  value="both_moderately">-</option>
+        <option style="display:none"  value="red">Red clearer</option>
+        <option style="display:none"  value="blue">Blue clearer</option>
+        <option style="display:none"  value="both_clear">Both clear</option>
+      </select>
+    </div><br>
+
+    <div>
+      <label>Fan Chart : </label>
+      <select style="width:50%" id="fanchart">
+        <option value="">All Equal</option>
+        <option value="one_clearer">One direction clearer</option>
+        <option style="display:none"  value="all_blur">All same quality / no darker line</option>
+        <option style="display:none" value="multiple_clear_blur">Multiple clear / blur (no single line pattern)</option>
+      </select>
+    </div><br>
+
+
+    <div>
+      <label>Darker Axis : </label>
+      <select style="width:50%" id="axisDarker"></select>
+    </div>
+  </div><br>
+
+  <div style="margin-top:15px" class="row">
+    <button style="width:30%;" onclick="runAllCalculations()">Calculate RX</button><br><br>    <button style="width:20%; "id="resetBtn">Reset to 0</button>
+
+
+  </div><br><br>
+    <div style="font-size:12px; height:20px""> RX to Compensate Rotation </div>
+  <div style="font-size:12px; height:20px" id="result"><i>- Press Calculate RX to see Results -</div>
+  </table>
+
+
+
+</div>
+
+
+
+
+</div>
+  </main>
+
+
+<script>
+/* ===== Helpers ===== */
+function round025(x){ return Math.round(x*4)/4; }
+function formatDiopter(x){ return (x>=0?"+":"") + Number(x).toFixed(2); }
+
+/* ===== Input Colors ===== */
+window.addEventListener("DOMContentLoaded", ()=>{
+  ['TS_sph','TS_cyl'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+
+    const updateColor = ()=>{
+      const v = parseFloat(el.value);
+      el.style.color = isNaN(v)||v===0 ? "black" : v>0 ? "green" : "red";
+    };
+
+    el.addEventListener("input", updateColor);
+    el.addEventListener("blur", ()=>{
+      const v = parseFloat(el.value);
+      if(!isNaN(v)) el.value = round025(v).toFixed(2);
+      updateColor();
+    });
+
+    updateColor();
+  });
+});
+
+/* ===== Axis Dropdown ===== */
+const axisLocked = [
+  {label:"3-9 , 9-3", deg:180},{label:"3:30-9:30 , 9:30-3:30", deg:15},
+  {label:"4-10 , 10-4", deg:30},{label:"4:30-10:30 , 10:30-4:30", deg:45},
+  {label:"5-11 , 11-5", deg:60},{label:"5:30-11:30 , 11:30-5:30", deg:75},
+  {label:"6-12 , 12-6", deg:90},{label:"6:30-12:30 , 12:30-6:30", deg:105},
+  {label:"7-1 , 1-7", deg:120},{label:"7:30-1:30 , 1:30-7:30", deg:135},
+  {label:"8-2 , 2-8", deg:150},{label:"8:30-2:30 , 2:30-8:30", deg:165}
+];
+
+function populateAxisDarker(){
+  const sel = document.getElementById("axisDarker");
+  const fan = document.getElementById("fanchart").value;
+  sel.innerHTML = '<option value="">--Select--</option>';
+  if(fan==="one_clearer"){
+    axisLocked.forEach(a=>{
+      const opt = document.createElement("option");
+      opt.value = a.deg;
+      opt.textContent = a.label;
+      sel.appendChild(opt);
+    });
+    sel.disabled=false;
+  } else sel.disabled=true;
+}
+
+populateAxisDarker();
+document.getElementById("fanchart").addEventListener("change", populateAxisDarker);
+
+/* ===== Axis Utilities ===== */
+function normAxis(a){ a=((a%180)+180)%180; return a===0?180:a; }
+function axisDelta(from,to){ let d=to-from; if(d>90)d-=180;if(d<-90)d+=180; return d; }
+function snapAxis(a){ let best=axisLocked[0].deg, minDiff=999; axisLocked.forEach(o=>{let diff=Math.abs(axisDelta(a,o.deg)); if(diff<minDiff){minDiff=diff; best=o.deg;}}); return best; }
+function resolveLensRotation(currentAxis, fanAxis){
+  currentAxis = normAxis(currentAxis); fanAxis=normAxis(fanAxis);
+  const delta=axisDelta(currentAxis,fanAxis);
+  return { originalAxis: currentAxis, perceivedAxis: fanAxis, rotation: delta, newAxis: snapAxis(currentAxis+delta) };
+}
+
+/* =================== Fan Chart Calculation with Opposite Axis Adjustment =================== */
+function runFanChartCalculation(input){
+  const out = []; 
+  const sph0  = Number(input.sph) || 0;
+  const cyl0  = Number(input.cyl) || 0;
+  const axis0 = Number(input.axis) || 0;
+  const fan   = input.fanChart;
+  const dark  = Number(input.axisDarkerDeg);
+
+  if(!fan){
+    out.push({ note:"No Changes Needed" });
+    return out;
+  }
+
+  if(fan !== "one_clearer"){
+    out.push({ sph: sph0, cyl: cyl0, axis: axis0, note:"No dominant axis → no rotation detected" });
+    return out;
+  }
+
+  if(!dark){
+    out.push({ note:"Please select Darker Axis" });
+    return out;
+  }
+
+  const rot = resolveLensRotation(axis0, dark);
+
+  // Axis adjustment rules (opposite direction)
+  let axisAdj = 0;
+  const absRot = Math.abs(rot.rotation);
+  if(absRot <= 44) axisAdj = -0 * Math.sign(rot.rotation); // opposite
+  else if(absRot <= 45) axisAdj = -10 * Math.sign(rot.rotation); // opposite
+  else if(absRot <= 60) axisAdj = -20 * Math.sign(rot.rotation); // opposite
+  else if(absRot <= 75) axisAdj = -30 * Math.sign(rot.rotation); // opposite
+
+
+  const newAxis = (axis0 + axisAdj + 180) % 180; // ensure 0–180
+  const finalAxis = newAxis === 0 ? 180 : newAxis;
+
+  out.push({
+    sph: sph0,
+    cyl: cyl0,
+    axis: finalAxis,
+    note: `Lens rotated ${Math.round(rot.rotation)}°, axis adjusted by ${axisAdj}°`
+  });
+
+  return out;
+}
+
+
+/* ===== Run & Display ===== */
+let lastResults=[];
+function roundAxis10(a){ let r=Math.round(a/10)*10; if(r===0)r=180;if(r>180)r=180; return r; }
+
+function runAllCalculations(){
+  const input = {
+    sph: TS_sph.value,
+    cyl: TS_cyl.value,
+    axis: TS_axis.value,
+    fanChart: fanchart.value,
+    axisDarkerDeg: axisDarker.value
+  };
+
+  const res = runFanChartCalculation(input);
+  lastResults = res;
+
+  result.innerHTML = "";
+
+  res.forEach(r => {
+    const row = document.createElement("div");
+
+    if(r.sph !== undefined && r.cyl !== undefined && r.axis !== undefined){
+      const axisChange = r.axis - Number(input.axis); // positive if increased
+      const sign = axisChange >= 0 ? "+" : "";
+      row.innerHTML = 
+`${formatDiopter(round025(r.sph))} / ${formatDiopter(round025(r.cyl))} X ${r.axis}<br>` +
+        `(Axis changed: ${sign}${axisChange}°)`;
+    } else {
+      row.textContent = r.note || "Incomplete input";
+    }
+
+    result.appendChild(row);
+  });
+}
+
+
+/* ===== Reset & Lock ===== */
+const resetBtn = document.getElementById("resetBtn");
+const lockFinalBtn = document.getElementById("lockFinalBtn");
+resetBtn.onclick = ()=>{ 
+  document.getElementById("TS_sph").value=0;
+  document.getElementById("TS_cyl").value=0;
+  document.getElementById("TS_axis").value=0;
+  runAllCalculations();
+};
+lockFinalBtn.onclick = ()=>{
+  const sph=Number(document.getElementById("TS_sph").value)||0;
+  const cyl=Number(document.getElementById("TS_cyl").value)||0;
+  const axis=document.getElementById("TS_axis").value||0;
+  const tbody = document.querySelector("#finalTable tbody");
+  if(!tbody) return;
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td class="red" style="width:50%">${formatDiopter(round025(sph))} / ${formatDiopter(round025(cyl))} X ${axis} <button class="removeBtn" onclick="this.closest('tr').remove()">Remove</button></td><td class="red" style="width:40%"><input style="width:80%" type="text" placeholder="Comment"></td>`;
+  tbody.appendChild(tr);
+};
+
+/* ===== Adjust Value ===== */
+function adjustValue(id,delta){ 
+  const el = document.getElementById(id); 
+  const current = parseFloat(el.value)||0; 
+  el.value = (Math.round((current+delta)*4)/4).toFixed(2); 
+  el.dispatchEvent(new Event('input')); 
+}
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
