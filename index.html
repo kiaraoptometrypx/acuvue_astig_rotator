@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MEYER German Tech-Rx</title>
+<title>Acuvue Astig Corrector</title>
 <style>
 /* ===== Base reset & typography ===== */
 html, body, table, th, td, input, button, select, option, b, label {
@@ -216,9 +216,9 @@ Current Contact Lens Prescription</span>
 
   <!-- Inputs -->
   <div style="margin-top:15px" class="row">
-    <label>Sph : <input style="width:70%; height:35px; margin-bottom:10px;" id="TS_sph" type="number" step="0.25"></label><br>
-    <label>Cyl : <input style="width:70%; height:35px; margin-bottom:10px;" id="TS_cyl" type="number" step="0.25" ></label><br>
-    <label>Axis : <input style="width:70%; height:35px; margin-bottom:10px;" id="TS_axis" type="number" step="5" min="0" max="180"></label><br>
+    <label>Sph : <input style="width:50%; height:55px; margin-bottom:10px;" id="TS_sph" type="number" step="0.25"></label><br>
+    <label>Cyl : <input style="width:50%; height:55px; margin-bottom:10px;" id="TS_cyl" type="number" step="0.25" ></label><br>
+    <label>Axis : <input style="width:50%; height:55px; margin-bottom:10px;" id="TS_axis" type="number" step="5" min="0" max="180"></label><br>
     <button style="width:15%; margin-left:2%" id="resetBtn">Reset to 0</button>
 
 </div>
@@ -241,7 +241,7 @@ Current Fan Chart Results</span>
   <div class="row">
     <div style="display:none">
       <label>Duochrome : </label>
-      <select style="width:25%" id="duochrome">
+      <select style="width:50%; height:55px; margin-bottom:10px;" id="duochrome">
         <option value="both_badly">Both badly blur - 6 / 9 unreadable </option>
         <option style="display:none"  value="both_moderately">-</option>
         <option style="display:none"  value="red">Red clearer</option>
@@ -252,15 +252,16 @@ Current Fan Chart Results</span>
 
     <div>
       <label>Fan Chart : </label>
-      <select style="font-size:11px; width:25%" id="fanchart">
+      <select style="width:50%; height:55px; margin-bottom:10px;" id="fanchart">
         <option value="">All Equal</option>
         <option value="one_clearer">One direction clearer</option>
         <option style="display:none"  value="all_blur">All same quality / no darker line</option>
         <option style="display:none" value="multiple_clear_blur">Multiple clear / blur (no single line pattern)</option>
       </select>
-<span style="margin-right:2%"></span>
+<br>
       <label>Darker Axis : </label>
-      <select style="width:25%; font-size:11px" id="axisDarker"></select>
+      <select style="width:50%; height:55px; margin-bottom:10px;" id="axisDarker"></select><br>
+
     <button style="width:15%; margin-left:2%" onclick="runAllCalculations()">Calculate RX</button>
 
     </div>
@@ -270,7 +271,7 @@ Current Fan Chart Results</span>
 </td></tr>
 <tr><th class="blue" style="text-align:left" colspan="4">
 
-    <div style="font-size:12px; height:20px; margin-top:15px"">New Prescription to Compensate Rotation </div>
+    <div style="margin-top:15px"">New Prescription to Compensate Rotation </div>
   <div style="font-size:12px; height:20px" id="result"><i> Press Calculate RX to see Results </div><br>
 
 </th></tr>
