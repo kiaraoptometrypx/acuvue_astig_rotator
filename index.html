@@ -83,6 +83,8 @@ th, td {
 th {
   background: #eee;
   font-weight: 600;
+  font-size: 12px;
+  padding: 20px 10px 20px 10px;
 }
 
 /* Column widths */
@@ -116,7 +118,7 @@ button {
 
 /* ===== Rows ===== */
 .row {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .row label {
@@ -169,55 +171,72 @@ select:focus {
 
 <div class="layout">
   <main id="content" class="content">
-
-
-
-
     <div id="s3" class="section">
-
-
-
-
-
 <table>
-<tr><th class="blue" colspan="4" style="text-align:left">
 
-1. Key in the current contact lens prescription.<br>
-2. Key in their response of the fan chart with a +0.75 fogging lens.<br>
-3. Press calculate prescription.<br>
+<tr style="border-top:none; border-bottom:none"><th class="blue" style="border-top:none; border-bottom:none" colspan="4">
+Acuvue Astigmatism Lenses Requires Calibration so that you'll see your best possible vision!
+</th></tr>
 
+<tr style="border-top:none; border-bottom:none"><th style="border-top:none; border-bottom:none" colspan="4">
+<img style="max-width:85%" src="https://raw.githubusercontent.com/kiaraoptometrypx/acuvue_astig_rotator/main/OASYS-TORIC-2.jpg" alt="OASYS Toric 2">
+</th></tr>
+
+<tr style="border-top:none; border-bottom:none"><th class="blue" style="border-top:none; border-bottom:none" colspan="4">
+Acuvue Astigmatism Lenses Requires Calibration so that you'll see your best possible vision!
 </th></tr>
 
 
-<tr><td colspan="4"><b><i>
+
+<tr><td style="text-align:left" colspan="4">
+<br>
+
+<u>Instructions</u><br>
+1. Key in the current contact lens prescription.<br>
+2. Key in their response of the fan chart with a +0.75 fogging lens.<br>
+3. Press calculate prescription.
+
 <br><br>
+
+
+
+</td></tr>
+<tr><td style="text-align:left" colspan="4">
+<br>
+
+
+<b><i>
 <span style="font-size:12px">
-Current Contact Lens Prescription</span><br><br>
+Current Contact Lens Prescription</span>
 
   <!-- Inputs -->
-  <div class="row">
-    <label>SPH : <input id="TS_sph" type="number" step="0.25"></label>
-    <label>CYL : <input id="TS_cyl" type="number" step="0.25" ></label>
-    <label>AXIS : <input id="TS_axis" type="number" step="5" min="0" max="180"></label>
+  <div style="margin-top:15px" class="row">
+    <label>Sph : <input id="TS_sph" type="number" step="0.25"></label>
+    <label>Cyl : <input id="TS_cyl" type="number" step="0.25" ></label>
+    <label>Axis : <input id="TS_axis" type="number" step="5" min="0" max="180"></label>
+    <button style="width:15%; margin-left:2%" id="resetBtn">Reset to 0</button>
+
 </div>
 
-  <div style="margin-top:15px" class="row">
+  <div style="margin-top:0px" class="row">
 
     <button style="display:none; width:18%; margin-right:2%"id="lockFinalBtn">Save to List</button>
   </div>
 
-<br><br>
+<br>
 </b></i>
 </td></tr>
-<tr><td colspan="4"><b><i><br><br>
+
+
+<tr><td style="text-align:left" colspan="4"><b><i><br>
 <span style="font-size:12px">
-Current Fan Chart Results</span><br>
+Current Fan Chart Results</span>
 
   <!-- Dropdowns -->
   <div class="row">
     <div style="display:none">
       <label>Duochrome : </label>
-      <select style="width:50%" id="duochrome">
+      <select style="width:25%" id="duochrome">
         <option value="both_badly">Both badly blur - 6 / 9 unreadable </option>
         <option style="display:none"  value="both_moderately">-</option>
         <option style="display:none"  value="red">Red clearer</option>
@@ -228,33 +247,31 @@ Current Fan Chart Results</span><br>
 
     <div>
       <label>Fan Chart : </label>
-      <select style="width:50%" id="fanchart">
+      <select style="font-size:11px; width:25%" id="fanchart">
         <option value="">All Equal</option>
         <option value="one_clearer">One direction clearer</option>
         <option style="display:none"  value="all_blur">All same quality / no darker line</option>
         <option style="display:none" value="multiple_clear_blur">Multiple clear / blur (no single line pattern)</option>
       </select>
-    </div><br>
-
-
-    <div>
+<span style="margin-right:2%"></span>
       <label>Darker Axis : </label>
-      <select style="width:50%" id="axisDarker"></select>
+      <select style="width:25%; font-size:11px" id="axisDarker"></select>
+    <button style="width:15%; margin-left:2%" onclick="runAllCalculations()">Calculate RX</button>
+
     </div>
-  </div><br>
+</b></i>
+<br>
 
-  <div style="margin-top:15px" class="row">
-    <button style="width:30%;" onclick="runAllCalculations()">Calculate RX</button><br><br>    <button style="width:20%; "id="resetBtn">Reset to 0</button>
+</td></tr>
+<tr><th class="blue" style="text-align:left" colspan="4">
+
+    <div style="font-size:12px; height:20px; margin-top:15px"">New Prescription to Compensate Rotation </div>
+  <div style="font-size:12px; height:20px" id="result"><i> Press Calculate RX to see Results </div><br>
+
+</th></tr>
 
 
-  </div><br><br>
-    <div style="font-size:12px; height:20px""> RX to Compensate Rotation </div>
-  <div style="font-size:12px; height:20px" id="result"><i>- Press Calculate RX to see Results -</div>
   </table>
-
-
-
-</div>
 
 
 
@@ -399,11 +416,18 @@ function runAllCalculations(){
     const row = document.createElement("div");
 
     if(r.sph !== undefined && r.cyl !== undefined && r.axis !== undefined){
-      const axisChange = r.axis - Number(input.axis); // positive if increased
+
+function axisDiff(a,b){
+  let d = Math.abs(a - b);
+  return d > 90 ? 180 - d : d;
+}
+
+const axisChange = axisDiff(r.axis, Number(input.axis));
+
+
       const sign = axisChange >= 0 ? "+" : "";
       row.innerHTML = 
-`${formatDiopter(round025(r.sph))} / ${formatDiopter(round025(r.cyl))} X ${r.axis}<br>` +
-        `(Axis changed: ${sign}${axisChange}°)`;
+` ${formatDiopter(round025(r.sph))} / ${formatDiopter(round025(r.cyl))} X ${r.axis} <span style="margin-left:5%"></span>   Axis changed by ${axisChange}°`;
     } else {
       row.textContent = r.note || "Incomplete input";
     }
